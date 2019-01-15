@@ -25,9 +25,9 @@ Horizon uses two Go tools you'll need to install:
 
 After the above are installed, run `go generate github.com/stellar/go/services/horizon/...`. This will look for any `.tmpl` files in the directory and use them to generate code when annotated structs are found in the package source.
 
-## <a name="scenarios"></a> Addind, rebuilding and using test scenarios
+## <a name="scenarios"></a> Adding, rebuilding and using test scenarios
 
-In order to simulate ledgers Horizon is using [`stellar-core-commander`](https://github.com/stellar/stellar_core_commander) recipe files  to add transactions and operations to ledgers using stellar-core test framework.
+In order to simulate ledgers Horizon uses [`stellar-core-commander`](https://github.com/stellar/stellar_core_commander) recipe files  to add transactions and operations to ledgers using stellar-core test framework.
 
 In order to add a new scenario or rebuild existing scenarios you need:
 
