@@ -33,7 +33,7 @@ In order to add a new scenario or rebuild existing scenarios you need:
 
 1. [`stellar-core-commander`](https://github.com/stellar/stellar_core_commander) (in short: `scc`) installed and [configured](https://github.com/stellar/stellar_core_commander#assumptions-about-environment).
 2. [`stellar-core`](https://github.com/stellar/stellar-core) binary.
-3. This repository forked locally.
+3. This repository cloned locally.
 
 `scc` allows you to write scripts/recipes that are later executed in `stellar-core` isolated network. After executing a recipe you can then export `stellar-core` database to be able to run Horizon ingestion system against it (this repository contains a script that does this for you - read below).
 
