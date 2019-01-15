@@ -1,7 +1,6 @@
 package ingest
 
 import (
-	"encoding/json"
 	"testing"
 
 	"github.com/stellar/go/services/horizon/internal/db2"
@@ -78,7 +77,7 @@ func Test_ingestOperationEffects(t *testing.T) {
 	var details struct {
 		Amount float64 `json:"amount,string"`
 	}
-	err = json.Unmarshal([]byte(effects[1].DetailsString.String), &details)
+	err = effects[1].UnmarshalDetails(&details)
 	if err != nil {
 		t.Fatal(err)
 	}
