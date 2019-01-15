@@ -87,17 +87,19 @@ func (action *PaymentsIndexAction) loadParams() {
 func (action *PaymentsIndexAction) loadRecords() {
 	q := action.HistoryQ()
 	ops := q.Operations().OnlyPayments()
+	forAccount := false
 
 	switch {
 	case action.AccountFilter != "":
 		ops.ForAccount(action.AccountFilter)
+		forAccount = true
 	case action.LedgerFilter > 0:
 		ops.ForLedger(action.LedgerFilter)
 	case action.TransactionFilter != "":
 		ops.ForTransaction(action.TransactionFilter)
 	}
 
-	action.Err = ops.Page(action.PagingParams).Select(&action.Records)
+	action.Err = ops.Page(action.PagingParams, forAccount).Select(&action.Records)
 }
 
 // loadLedgers populates the ledger cache for this action

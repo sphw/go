@@ -119,12 +119,18 @@ func (q *OperationsQ) OnlyPayments() *OperationsQ {
 }
 
 // Page specifies the paging constraints for the query being built by `q`.
-func (q *OperationsQ) Page(page db2.PageQuery) *OperationsQ {
+func (q *OperationsQ) Page(page db2.PageQuery, forAccount bool) *OperationsQ {
 	if q.Err != nil {
 		return q
 	}
 
-	q.sql, q.Err = page.ApplyTo(q.sql, "hop.id")
+	col := "hop.id"
+	if forAccount {
+		// in order to utilize the index hist_op_p_id on (history_account_id, history_operation_id)
+		col = "hopp.history_operation_id"
+	}
+
+	q.sql, q.Err = page.ApplyTo(q.sql, col)
 	return q
 }
 
