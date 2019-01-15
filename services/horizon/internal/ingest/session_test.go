@@ -1,6 +1,7 @@
 package ingest
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/stellar/go/services/horizon/internal/db2"
@@ -74,6 +75,16 @@ func Test_ingestOperationEffects(t *testing.T) {
 		tt.Assert.Equal(history.EffectTrade, effects[3].Type)
 	}
 
+	var details struct {
+		Amount float64 `json:"amount,string"`
+	}
+	err = json.Unmarshal([]byte(effects[1].DetailsString.String), &details)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if details.Amount != 100 {
+		t.Errorf("got: %v, want: 100, details: %s", details.Amount, effects[1].DetailsString.String)
+	}
 }
 
 func Test_ingestBumpSeq(t *testing.T) {
